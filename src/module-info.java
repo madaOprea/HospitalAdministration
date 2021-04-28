@@ -3,4 +3,5 @@ module HospitalAdministration {
     requires javafx.controls;
 
     opens sample;
+    opens controller;
 }
