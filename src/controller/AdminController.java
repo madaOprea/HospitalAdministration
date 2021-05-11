@@ -30,7 +30,7 @@ public class AdminController  {
 
     }
 
-    public void showData() {
+    public void initialize() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().namePatient);
         sectionColumn.setCellValueFactory(cellData -> cellData.getValue().sectionPatient);
         diagnosticColumn.setCellValueFactory(cellData -> cellData.getValue().diagnosticPatient);
@@ -43,11 +43,14 @@ public class AdminController  {
                 new Patient("Emma", "Jones", "emma.jones@example.com", "1"),
                 new Patient("Michael", "Brown", "michael.brown@example.com", "1")
         );
+    }
 
+    @FXML
+    private void showData() {
         for (Patient patient : tableWithAllPatients.getItems()) {
             String formatted = String.format("%s %s (%s)", patient.getNamePatient(), patient.getSectionPatient(), patient.getDiagnosticPatient(), patient.getStatusPatient());
             System.out.println(formatted);
         }
+        System.out.println();
     }
-
 }
