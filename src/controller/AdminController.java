@@ -1,16 +1,11 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import model.Patient;
 
 public class AdminController  {
-
-    @FXML private Button addPatientButton;
-    @FXML private Button editPatientButton;
-    @FXML private Button deletePatientButton;
 
     @FXML private TableView<Patient> tableWithAllPatients;
     @FXML private TableColumn<Patient, String> nameColumn;
@@ -18,17 +13,13 @@ public class AdminController  {
     @FXML private TableColumn<Patient, String> diagnosticColumn;
     @FXML private TableColumn<Patient, String> statusColumn;
 
-    public void addPatientOnAction(){
+    @FXML private Button addPatientButton;
+    @FXML private Button editPatientButton;
+    @FXML private Button deletePatientButton;
 
-    }
-
-    public void editPatientOnAction(){
-
-    }
-
-    public void deletePatientOnAction(){
-
-    }
+    @FXML private TextField newPatientNameTextField;
+    @FXML private ChoiceBox newPatientSectionChoiceBox;
+    @FXML private TextArea newPatientDiagnosticTextArea;
 
     public void initialize() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().namePatient);
@@ -37,12 +28,14 @@ public class AdminController  {
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusPatient);
 
         tableWithAllPatients.getItems().addAll(
-                new Patient("Jacob", "Smith", "jacob.smith@example.com", "0"),
-                new Patient("Isabella", "Johnson", "isabella.johnson@example.com", "1"),
-                new Patient("Ethan", "Williams", "ethan.williams@example.com", "1"),
-                new Patient("Emma", "Jones", "emma.jones@example.com", "1"),
-                new Patient("Michael", "Brown", "michael.brown@example.com", "1")
+                new Patient("Jacob", "Gastroenterology", "cured", "0"),
+                new Patient("Isabella", "Cardiology", "cured", "1"),
+                new Patient("Ethan", "Gastroenterology", "cured", "1"),
+                new Patient("Emma", "Surgery", "cured", "1"),
+                new Patient("Michael", "Gastroenterology", "cured", "1")
         );
+        tableWithAllPatients.setEditable(true);
+        tableWithAllPatients.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
     @FXML
@@ -52,5 +45,26 @@ public class AdminController  {
             System.out.println(formatted);
         }
         System.out.println();
+    }
+
+    public void addPatientOnAction(ActionEvent actionEvent) {
+        Patient patient = new Patient(newPatientNameTextField.getText(),
+                newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
+                newPatientDiagnosticTextArea.getText(),
+                "0");
+        tableWithAllPatients.getItems().add(patient);
+        clearData();
+    }
+
+    public void editPatientOnAction() {
+    }
+
+    public void deletePatientOnAction() {
+    }
+
+    public void clearData() {
+        newPatientNameTextField.setText("");
+        // TO DO: clear for choicebox
+        newPatientDiagnosticTextArea.setText("");
     }
 }
