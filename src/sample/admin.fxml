@@ -7,10 +7,10 @@
    <children>
       <TableView fx:id="tableWithAllPatients" layoutX="18.0" layoutY="19.0" prefHeight="210.0" prefWidth="431.0" AnchorPane.rightAnchor="151.0">
         <columns>
-          <TableColumn prefWidth="110.0" text="Patient name" />
-          <TableColumn prefWidth="96.0" text="Section" />
-            <TableColumn prefWidth="149.40" text="Diagnostic" />
-            <TableColumn prefWidth="75.40" text="Status" />
+          <TableColumn fx:id="nameColumn" prefWidth="110.0" text="Patient Name" />
+          <TableColumn fx:id="sectionColumn" prefWidth="96.0" text="Section" />
+            <TableColumn fx:id="diagnosticColumn" prefWidth="149.40" text="Diagnostic" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.40" text="Status" />
         </columns>
       </TableView>
       <TextArea layoutX="102.0" layoutY="310.0" prefHeight="67.0" prefWidth="150.0" />
