@@ -60,6 +60,7 @@ public class AdminController  {
     }
 
     public void deletePatientOnAction() {
+        tableWithAllPatients.getItems().remove(tableWithAllPatients.getSelectionModel().getSelectedItem());
     }
 
     public void clearData() {
