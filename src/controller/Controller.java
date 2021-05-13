@@ -1,12 +1,15 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Main;
+
 import java.io.IOException;
 
 
@@ -24,7 +27,7 @@ public class Controller {
         stage.show();
     }
 
-    public void loginButtonOnAction() {
+    public void loginButtonOnAction(ActionEvent actionEvent) {
         if (usernameTextField.getText().trim().isEmpty()) {
             System.out.println("Username or password was not inserted!");
         } else if (usernameTextField.getText().equals("admin") && passwordTextField.getText().equals("admin")) {
@@ -41,7 +44,7 @@ public class Controller {
                 e.printStackTrace();
                 e.getCause();
             } finally {
-                //Main.primaryStage.close();
+                ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
             }
         }
 //        scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());

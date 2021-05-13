@@ -34,8 +34,18 @@ public class AdminController  {
                 new Patient("Emma", "Surgery", "cured", "1"),
                 new Patient("Michael", "Gastroenterology", "cured", "1")
         );
-        tableWithAllPatients.setEditable(true);
+
         tableWithAllPatients.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//inner
+
+        tableWithAllPatients.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) ->
+        {
+            if (newValue != null) {
+                newPatientNameTextField.setText(newValue.getNamePatient());
+                newPatientSectionChoiceBox.setValue(newValue.getSectionPatient());
+                newPatientDiagnosticTextArea.setText(newValue.getDiagnosticPatient());
+            }
+        });
     }
 
     @FXML
@@ -57,15 +67,33 @@ public class AdminController  {
     }
 
     public void editPatientOnAction() {
+        if (validateFields() == true) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("The patient name or the diagnostic is empty!");
+        } else {
+            System.out.println("a intrat");
+            Patient patientSelectedToBeEdited = tableWithAllPatients.getSelectionModel().getSelectedItem();
+            Patient editedPatient = new Patient(newPatientNameTextField.getText(),
+                    newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
+                    newPatientDiagnosticTextArea.getText(),
+                    patientSelectedToBeEdited.getStatusPatient());
+            tableWithAllPatients.getItems().remove(patientSelectedToBeEdited);
+            tableWithAllPatients.getItems().add(editedPatient);
+            clearData();
+        }
     }
 
     public void deletePatientOnAction() {
         tableWithAllPatients.getItems().remove(tableWithAllPatients.getSelectionModel().getSelectedItem());
     }
 
-    public void clearData() {
+    private void clearData() {
         newPatientNameTextField.setText("");
         // TO DO: clear for choicebox
         newPatientDiagnosticTextArea.setText("");
+    }
+
+    private boolean validateFields() {
+        return newPatientNameTextField.getText().isEmpty() || newPatientDiagnosticTextArea.getText().isEmpty() ? true : false;
     }
 }
