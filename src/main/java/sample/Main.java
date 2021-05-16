@@ -1,6 +1,5 @@
-package sample;
+package main.java.sample;
 
-import controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Controller.showLoginForm(primaryStage);
+        main.java.controller.Controller.showLoginForm(primaryStage);
     }
 
 }

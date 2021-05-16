@@ -2,6 +2,6 @@ module HospitalAdministration {
     requires javafx.fxml;
     requires javafx.controls;
 
-    opens sample;
-    opens controller;
+    opens main.java.sample;
+    opens main.java.controller;
 }

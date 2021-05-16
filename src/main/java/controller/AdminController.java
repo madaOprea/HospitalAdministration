@@ -1,9 +1,9 @@
-package controller;
+package main.java.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Patient;
+import main.java.model.Patient;
 
 public class AdminController  {
 
@@ -71,7 +71,6 @@ public class AdminController  {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("The patient name or the diagnostic is empty!");
         } else {
-            System.out.println("a intrat");
             Patient patientSelectedToBeEdited = tableWithAllPatients.getSelectionModel().getSelectedItem();
             Patient editedPatient = new Patient(newPatientNameTextField.getText(),
                     newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
