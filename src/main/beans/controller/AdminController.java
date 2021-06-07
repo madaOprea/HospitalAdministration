@@ -1,9 +1,9 @@
-package main.java.controller;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import main.java.model.Patient;
+import model.Patient;
 
 public class AdminController  {
 

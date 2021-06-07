@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="beans.Patient" table="Patients" schema="hospitaladministration">
+        <id name="idPatient"><column name = "idPatient" sql-type="varchar(20)"/></id>
+        <property name="namePatient"><column name = "namePatient" sql-type="varchar(20)" length="20"/></property>
+        <property name="sectionPatient"><column name = "sectionPatient" sql-type="varchar(20)" length="20"/></property>
+        <property name="diagnosticPatient"><column name = "diagnosticPatient" sql-type="varchar(20)" length="20"/></property>
+        <property name="statusPatient"><column name = "statusPatient" sql-type="varchar(20)" length="20"/></property>
+    </class>
+</hibernate-mapping>
