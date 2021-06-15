@@ -46,7 +46,5 @@ public class Controller {
                 ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
             }
         }
-//        scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());
-
     }
 }

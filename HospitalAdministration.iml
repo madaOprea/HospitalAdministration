@@ -4,12 +4,20 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="hibernate.cfg.xml" value="a5218b5f-6e68-40d8-8fe8-0e9707b939ea" />
           <unit-entry name="persistence.xml" value="bdbbe46e-d2be-4a55-8834-9f7c6f8be3fc" />
         </datasource-map>
         <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/hibernate.cfg.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/persistence.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/beans/model/Patient.hbm.xml" />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping />
+        <naming-strategy-map />
       </configuration>
     </facet>
   </component>
@@ -27,6 +35,7 @@
     <orderEntry type="library" exported="" name="javafx-sdk-11.0" level="application" />
     <orderEntry type="library" exported="" name="Hibernate 5.4.11-5.4.11" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
   </component>
 </module>
