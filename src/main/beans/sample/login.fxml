@@ -13,7 +13,7 @@
     <children>
         <Pane prefHeight="286.0" prefWidth="269.0">
             <children>
-                <Button fx:id="loginButton" layoutX="99.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Say hello" />
+                <Button fx:id="loginButton" layoutX="99.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Login" />
                 <TextField fx:id="usernameTextField" layoutX="60.0" layoutY="93.0" promptText="username" />
                 <TextField fx:id="passwordTextField" layoutX="60.0" layoutY="131.0" promptText="password" />
             </children>
