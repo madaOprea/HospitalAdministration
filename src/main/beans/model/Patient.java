@@ -1,66 +1,84 @@
 package model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+@Table(name = "patients", schema = "hospitaladministration", catalog = "")
 public class Patient {
-    public StringProperty namePatient = new SimpleStringProperty(this, "nameColumn");
-    public StringProperty sectionPatient = new SimpleStringProperty(this, "sectionColumn");
-    public StringProperty diagnosticPatient = new SimpleStringProperty(this, "diagnosticColumn");
-    public StringProperty statusPatient = new SimpleStringProperty(this, "statusColumn");
 
-    public Patient(String name, String section, String diagnostic, String status) {
-        this.setNamePatient(name);
-        this.setSectionPatient(section);
-        this.setDiagnosticPatient(diagnostic);
-        this.setStatusPatient(status);
+    private int id;
+    private String name;
+    private String section;
+    private String diagnostic;
+    private String status;
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
     }
 
-    public String getNamePatient() {
-        return namePatientProperty().get();
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public StringProperty namePatientProperty() {
-        return namePatient;
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setNamePatient(String namePatient) {
-        namePatientProperty().set(namePatient);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSectionPatient() {
-        return sectionPatientProperty().get();
+    @Basic
+    @Column(name = "section")
+    public String getSection() {
+        return section;
     }
 
-    public StringProperty sectionPatientProperty() {
-        return sectionPatient;
+    public void setSection(String section) {
+        this.section = section;
     }
 
-    public void setSectionPatient(String sectionPatient) {
-        sectionPatientProperty().set(sectionPatient);
+    @Basic
+    @Column(name = "diagnostic")
+    public String getDiagnostic() {
+        return diagnostic;
     }
 
-    public String getDiagnosticPatient() {
-        return diagnosticPatientProperty().get();
+    public void setDiagnostic(String diagnostic) {
+        this.diagnostic = diagnostic;
     }
 
-    public StringProperty diagnosticPatientProperty() {
-        return diagnosticPatient;
+    @Basic
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
     }
 
-    public void setDiagnosticPatient(String diagnosticPatient) {
-        diagnosticPatientProperty().set(diagnosticPatient);
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getStatusPatient() {
-        return statusPatientProperty().get();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return id == patient.id && Objects.equals(name, patient.name) && Objects.equals(section, patient.section) && Objects.equals(diagnostic, patient.diagnostic) && Objects.equals(status, patient.status);
     }
 
-    public StringProperty statusPatientProperty() {
-        return statusPatient;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, section, diagnostic, status);
     }
 
-    public void setStatusPatient(String statusPatient) {
-        statusPatientProperty().set(statusPatient);
+    @Override
+    public String toString() {
+        return "Patient [id=" + id + ", name=" + name + ", diagnostic=" + diagnostic + "]";
     }
 }

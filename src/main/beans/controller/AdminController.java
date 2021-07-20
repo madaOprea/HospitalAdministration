@@ -9,10 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Patient;
+import model.Patients;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import sample.Main;
+import util.HibernateUtil;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class AdminController  {
 
@@ -51,32 +56,18 @@ public class AdminController  {
         } finally {
             ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         }
-//        nameColumn.setCellValueFactory(cellData -> cellData.getValue().namePatient);
-//        sectionColumn.setCellValueFactory(cellData -> cellData.getValue().sectionPatient);
-//        diagnosticColumn.setCellValueFactory(cellData -> cellData.getValue().diagnosticPatient);
-//        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusPatient);
-//
-//        tableWithAllPatients.getItems().addAll(
-//                new Patient("Jacob", "Gastroenterology", "cured", "0"),
-//                new Patient("Isabella", "Cardiology", "cured", "1"),
-//                new Patient("Ethan", "Gastroenterology", "cured", "1"),
-//                new Patient("Emma", "Surgery", "cured", "1"),
-//                new Patient("Michael", "Gastroenterology", "cured", "1")
-//        );
-//        try {
-//            System.out.println("hey hey hey");
-//            SessionFactory factory = new Configuration()
-//                    .configure("hibernate.cfg.xml")
-//                    .addAnnotatedClass(PatientsEntity.class)
-//                    .buildSessionFactory();
-//            System.out.println("bla hey hey");
-//            Session session = factory.getCurrentSession();
-//            session.beginTransaction();
-//            session.save(new PatientsEntity(newPatientNameTextField.getText(),
-//                    newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
-//                    newPatientDiagnosticTextArea.getText(), "1"));
-//            session.getTransaction().commit();
-//
+
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            List<Patients> patientList = session.createQuery("from Patients", Patients.class).list();
+            patientList.forEach(p -> System.out.println(p.getName()));
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
 //            tableWithAllPatients.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 //
 //            tableWithAllPatients.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) ->
@@ -92,38 +83,37 @@ public class AdminController  {
 //        }
     }
 
-    @FXML
-    private void showData() {
-        for (Patient patient : tableWithAllPatients.getItems()) {
-            String formatted = String.format("%s %s (%s)", patient.getNamePatient(), patient.getSectionPatient(), patient.getDiagnosticPatient(), patient.getStatusPatient());
-            System.out.println(formatted);
-        }
-        System.out.println();
-    }
+//    private void showData() {
+//        for (Patient patient : tableWithAllPatients.getItems()) {
+//            String formatted = String.format("%s %s (%s)", patient.getNamePatient(), patient.getSectionPatient(), patient.getDiagnosticPatient(), patient.getStatusPatient());
+//            System.out.println(formatted);
+//        }
+//        System.out.println();
+//    }
 
     public void addPatientOnAction(ActionEvent actionEvent) {
-        Patient patient = new Patient(newPatientNameTextField.getText(),
-                newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
-                newPatientDiagnosticTextArea.getText(),
-                "0");
-        tableWithAllPatients.getItems().add(patient);
-        clearData();
+//        Patient patient = new Patient(newPatientNameTextField.getText(),
+//                newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
+//                newPatientDiagnosticTextArea.getText(),
+//                "0");
+//        tableWithAllPatients.getItems().add(patient);
+//        clearData();
     }
 
     public void editPatientOnAction() {
-        if (validateFields() == true) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("The patient name or the diagnostic is empty!");
-        } else {
-            Patient patientSelectedToBeEdited = tableWithAllPatients.getSelectionModel().getSelectedItem();
-            Patient editedPatient = new Patient(newPatientNameTextField.getText(),
-                    newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
-                    newPatientDiagnosticTextArea.getText(),
-                    patientSelectedToBeEdited.getStatusPatient());
-            tableWithAllPatients.getItems().remove(patientSelectedToBeEdited);
-            tableWithAllPatients.getItems().add(editedPatient);
-            clearData();
-        }
+//        if (validateFields() == true) {
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setContentText("The patient name or the diagnostic is empty!");
+//        } else {
+//            Patient patientSelectedToBeEdited = tableWithAllPatients.getSelectionModel().getSelectedItem();
+//            Patient editedPatient = new Patient(newPatientNameTextField.getText(),
+//                    newPatientSectionChoiceBox.getSelectionModel().getSelectedItem().toString(),
+//                    newPatientDiagnosticTextArea.getText(),
+//                    patientSelectedToBeEdited.getStatus());
+//            tableWithAllPatients.getItems().remove(patientSelectedToBeEdited);
+//            tableWithAllPatients.getItems().add(editedPatient);
+//            clearData();
+//        }
     }
 
     public void deletePatientOnAction() {
